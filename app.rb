@@ -6,5 +6,13 @@ class Battle < Sinatra::Base
     "This is a game of BATTLE!"
   end
 
-  # run! if app_file == $0
+  get '/form' do
+    erb(:form)
+  end
+
+  post '/names' do
+    @name1 = params[:name1]
+    @name2 = params[:name2]
+    erb(:names)
+  end
 end

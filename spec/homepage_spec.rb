@@ -1,14 +1,9 @@
 require_relative '../app'
-require 'selenium-webdriver'
 require 'spec_helper'
+
 ENV['RACK_ENV'] = 'test'
 
 describe Battle do
-
-  # @browser = Selenium::WebDriver.for :firefox
-  # @browser.get "localhost:9292"
-  #
-  # let(:browser) {@browser}
 
   feature "homepage" do
     before do
@@ -20,4 +15,24 @@ describe Battle do
     end
   end
 
+  feature "form" do
+
+    scenario "users can submit names" do
+      visit '/form'
+      fill_in('name1', with: 'Caitlin')
+      fill_in('name2', with: 'Irina')
+      click_button("Submit")
+    end
+
+    before do
+      visit '/form'
+      fill_in('name1', with: 'Caitlin')
+      fill_in('name2', with: 'Irina')
+      click_button("Submit")
+    end
+
+    scenario 'shows the users names' do
+      expect(page).to have_content("Welcome Caitlin and Irina")
+    end
+  end
 end
