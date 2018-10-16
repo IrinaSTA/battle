@@ -3,20 +3,16 @@ require 'pry'
 
 class Battle < Sinatra::Base
 
-  get '/' do
-    "This is a game of BATTLE!"
-  end
+  enable :sessions
 
-  get '/form' do
+  get '/' do
     erb(:form)
   end
-
-  enable :sessions
 
   post '/names' do
     session['name1'] = params[:name1]
     session['name2'] = params[:name2]
-    redirect to('/play')
+    redirect '/play'
   end
 
   get '/play' do
