@@ -17,21 +17,11 @@ describe Battle do
 
   feature "form" do
 
-    scenario "users can submit names" do
+    scenario "users can submit names and see a welcome" do
       visit '/form'
       fill_in('name1', with: 'Caitlin')
       fill_in('name2', with: 'Irina')
       click_button("Submit")
-    end
-
-    before do
-      visit '/form'
-      fill_in('name1', with: 'Caitlin')
-      fill_in('name2', with: 'Irina')
-      click_button("Submit")
-    end
-
-    scenario 'shows the users names' do
       expect(page).to have_content("Welcome Caitlin and Irina")
     end
   end
