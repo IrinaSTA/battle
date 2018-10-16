@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'pry'
 
 class Battle < Sinatra::Base
 
@@ -10,9 +11,18 @@ class Battle < Sinatra::Base
     erb(:form)
   end
 
+  enable :sessions
+
   post '/names' do
-    @name1 = params[:name1]
-    @name2 = params[:name2]
-    erb(:names)
+    session['name1'] = params[:name1]
+    session['name2'] = params[:name2]
+    redirect to('/play')
   end
+
+  get '/play' do
+    @name1 = session['name1']
+    @name2 = session['name2']
+    erb(:play)
+  end
+
 end
