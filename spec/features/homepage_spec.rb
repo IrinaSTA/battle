@@ -1,4 +1,4 @@
-require_relative '../app'
+require_relative '../../app'
 require 'spec_helper'
 
 ENV['RACK_ENV'] = 'test'
@@ -6,8 +6,9 @@ ENV['RACK_ENV'] = 'test'
 describe Battle do
 
   feature "homepage" do
+
     before do
-      visit '/'
+      sign_in_and_play
     end
 
     scenario 'user sees a greeting' do
@@ -15,9 +16,6 @@ describe Battle do
     end
 
     scenario "users can submit names and see a welcome" do
-      fill_in('name1', with: 'Caitlin')
-      fill_in('name2', with: 'Irina')
-      click_button("Submit")
       expect(page).to have_content("Welcome Caitlin and Irina")
     end
   end
