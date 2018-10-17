@@ -1,5 +1,4 @@
 require 'sinatra/base'
-require 'pry'
 
 class Battle < Sinatra::Base
 
